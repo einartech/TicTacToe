@@ -12,7 +12,7 @@ public class Board {
         this.position = new char[this.row][this.column];
     }
 
-    public void PrintBoard() {
+    public void printBoard() {
         for (int rowIndex = 0; rowIndex < this.position.length; rowIndex++) {
             for (int columnIndex = 0; columnIndex < this.position[rowIndex].length; columnIndex++) {
                 if (this.position[rowIndex][columnIndex] == '\0') {
@@ -31,9 +31,10 @@ public class Board {
             }
             System.out.println();
         }
+
     }
 
-    public void EditBoard(int row, int column, char value) {
+    public void editBoard(int row, int column, char value) {
         if (row >= 0 && row < this.row && column >= 0 && column < this.column) {
             this.position[row][column] = value;
         } else {
