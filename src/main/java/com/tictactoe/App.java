@@ -1,13 +1,14 @@
 package com.tictactoe;
 
-/**
- * Hello world!
- *
- */
+
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+      Board ttt = new Board(3,3);
+      ttt.PrintBoard();
+    
+      
     }
 }
+ 
