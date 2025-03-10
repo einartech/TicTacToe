@@ -29,5 +29,5 @@ public class Main {
     scanner.close();
   }
 
-  //Crear clase player para gestion de turnitos
+  // Crear clase player para gestion de turnitos
 }
