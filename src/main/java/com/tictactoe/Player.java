@@ -3,14 +3,25 @@ package com.tictactoe;
 import java.util.Scanner;
 
 public class Player {
-    char id;
-    Scanner scanner;
+    private char id;
+    private Scanner scanner;
 
+    /**
+     * Constructor para inicializar un jugador con un identificador.
+     *
+     * @param id Identificador del jugador (por ejemplo, 'X' o 'O').
+     */
     public Player(char id) {
         this.id = id;
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Solicita al jugador que ingrese una fila y una columna para su jugada.
+     *
+     * @return Un arreglo de enteros donde el primer elemento es la fila y el
+     *         segundo es la columna.
+     */
     public int[] play() {
         int row = -1;
         int column = -1;
@@ -35,10 +46,21 @@ public class Player {
             }
         }
 
-        int[] play = { row, column };
-        return play;
+        return new int[] { row, column };
     }
 
+    /**
+     * Devuelve el identificador del jugador.
+     *
+     * @return El identificador del jugador.
+     */
+    public char getId() {
+        return this.id;
+    }
+
+    /**
+     * Cierra el escáner utilizado para leer la entrada del jugador.
+     */
     public void closeScanner() {
         this.scanner.close();
     }
