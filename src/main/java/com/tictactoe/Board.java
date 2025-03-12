@@ -38,7 +38,11 @@ public class Board {
         if (row >= 0 && row < this.row && column >= 0 && column < this.column) {
             this.position[row][column] = value;
         } else {
-            System.out.println("Invalid position");
+            System.out.print("\n\n\n");
+            System.err.println("Has insertado como numero de fila: " + row + " y columna: " + column + ".  "
+                    + "Por favor, ingresa un número de fila y columna válidos. El máximo número de fila es: "
+                    + this.row + " mientras que el máximo número de columna es: " + this.column
+                    + " El minimo de ambos es 0.");
         }
     }
 }
