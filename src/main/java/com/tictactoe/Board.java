@@ -67,6 +67,54 @@ public class Board {
         }
     }
 
+    // Verificar si el jugador ha ganado teniendo en cuenta los sigtes casos:
+    
+    public  boolean checkVictory(char idPlayer) {
+        // caso1 Verificar filas
+        for (int rowIndex = 0; rowIndex < this.position.length; rowIndex++) {
+            if (this.position[rowIndex][0] == idPlayer && this.position[rowIndex][1] == idPlayer && this.position[rowIndex][2] == idPlayer) {
+                return true;
+            }
+        }
+        
+        // caso2 Verificar columnas
+        for (int columnIndex = 0; columnIndex < this.column; columnIndex++) {
+            if (this.position[0][columnIndex] == idPlayer && this.position[1][columnIndex] == idPlayer && this.position[2][columnIndex] == idPlayer) {
+                return true;
+            }
+        }
+        
+        // caso3 Verificar diagonal principal ejemplo: \
+        if (this.position[0][0] == idPlayer && this.position[1][1] == idPlayer && this.position[2][2] == idPlayer) {
+            return true;
+        }
+        
+        // caso4 Verificar diagonal secundaria ejemplo : /
+        if (this.position[0][2] == idPlayer && this.position[1][1] == idPlayer && this.position[2][0] == idPlayer) {
+            return true;
+        }
+        
+        return false;  // Si no se cumple ningun caso 
+    }
+
+    // Verificar si el tablero está lleno para usarse en la función isPlayerEqual
+    private boolean fullBoard() {
+        for (int rowIndex = 0; rowIndex < this.position.length; rowIndex++) {
+            for (int columnIndex = 0; columnIndex < this.position[rowIndex].length; columnIndex++) {
+                if (this.position[rowIndex][columnIndex] == '\0') { 
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // Verifica  si esta lleno el tablero y nos se encuentra ningun jugador con la victoria
+    public  boolean isPlayerEqual(char idPlayer1, char idPlayer2) {
+        return fullBoard() && !checkVictory(idPlayer1) && !checkVictory(idPlayer2);
+    }
+
+
     /**
      * Verifica si la posición especificada es válida dentro del tablero.
      *

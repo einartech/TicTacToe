@@ -67,6 +67,18 @@ public class Main {
         board.printBoard();
         System.out.print("\n\n\n");
 
+        boolean victory = board.checkVictory(currentPlayer.getId());
+        if (victory) {
+          System.out.println("El jugador " + currentPlayer.getId() + " ha ganado!");
+          break;
+        }
+
+        boolean isPlayerEqual = board.isPlayerEqual(player1.getId(), player2.getId());
+        if (isPlayerEqual) {
+          System.out.println("El juego ha terminado en empate!");
+          break;
+        } 
+        
         turn++;
       }
     }
