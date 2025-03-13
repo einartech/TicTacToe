@@ -4,7 +4,7 @@ public class Main {
 
   public static void main(String[] args) {
     // Mensaje de bienvenida
-    System.out.println("Bienvenide al juego de Tic Tac Toe, te gustaria jugar?");
+    System.out.println("¡Bienvenide al juego de Tic Tac Toe!");
 
     // Inicializar el tablero y los jugadores
     Board board = new Board(3, 3);
@@ -14,7 +14,7 @@ public class Main {
     // Imprimir el tablero inicial
     System.out.print("\n\n\n");
     board.printBoard();
-
+    System.out.print("\n\n\n");
     int turn = 0;
     boolean tryAgain = false;// defini una variable (tryAgain) para que el jugador pueda intentarlo de nuevo digitando las coordenadas
 

@@ -29,7 +29,7 @@ public class Player {
 
         while (!validInput) {
             System.out.println(playerTryAgain ? "" : "Turno : " + this.id);//si viene en true el playertryagain,no se muestra el turno 
-            System.out.println(playerTryAgain ? "Ese sitio está ocupado, intenta de nuevo:" : "Selecciona una fila y una columna (separadas por un espacio):");//muestra el mensaje si el usuario debe intentarlo de nuevo
+            System.out.println(playerTryAgain ? "Ese sitio está ocupado, intenta de nuevo:" : "Instrucciones:\n" + " - Selecciona una posición para tu ficha.\n" + " - Fila y columna deben ser números entre 0 y 2.\n" + " - Escribe los dos números separados por un espacio.\n" + " - Ejemplo válido: 1 2 (colocará tu ficha en fila 1, columna 2).");//muestra el mensaje si el usuario debe intentarlo de nuevo
             String response = this.scanner.nextLine();
 
             String[] parts = response.split(" ");
