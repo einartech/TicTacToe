@@ -50,7 +50,9 @@ public class Main {
 
     // Ciclo de turnos del juego
     while (turn < 9) {
-      System.out.println(tryAgain ? "" : "Turno actual: " + turn);// para que mostrar el turno actual? no se muestra el
+      if (tryAgain) {
+        System.out.println("Turno actual: " + turn);// para que mostrar el turno actual? no se muestra el
+      }
                                                                   // turno actual cuando es un reintento
       Player currentPlayer = (turn % 2 == 0) ? player1 : player2;
       int[] coordinate = currentPlayer.play(tryAgain);// va el valor tryAgain para que no se muestre el mensaje :

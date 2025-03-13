@@ -59,7 +59,7 @@ public class Board {
                         .println("Has insertado el valor: " + value + " en la fila: " + row + " y columna: " + column);
             }
         } else {
-            System.out.print("\n\n\n");
+            // System.out.print("\n\n\n");
             System.err.println("Posición inválida. Fila: " + row + ", Columna: " + column + ". "
                     + "Por favor, ingresa una fila y columna válidas. El máximo número de fila es: "
                     + (this.row - 1) + " y el máximo número de columna es: " + (this.column - 1) + ". "
@@ -80,7 +80,17 @@ public class Board {
 
     //funcion para validar si la posicion ya tiene un valor
     public boolean hasValue(int row, int column) {
+        if (!this.isValidPosition(row, column)) {//movi este codigo de la linea 55 para que muestre el mensaje de error
+            // System.out.print("\n\n\n");
+            System.err.println("Posición inválida. Fila: " + row + ", Columna: " + column + ". "
+                    + "Por favor, ingresa una fila y columna válidas. El máximo número de fila es: "
+                    + (this.row - 1) + " y el máximo número de columna es: " + (this.column - 1) + ". "
+                    + "El mínimo de ambos es 0.");
+            return true;
+        }
         if (this.position[row][column] != '\0') {//movi este codigo de la linea 55 para que muestre el mensaje de error
+            // System.out.print("\n\n\n");
+            System.err.println("Ese sitio está ocupado");
             return true;
         }
         return false;
