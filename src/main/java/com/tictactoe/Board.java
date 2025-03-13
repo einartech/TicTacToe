@@ -52,10 +52,8 @@ public class Board {
      */
     public void editBoard(int row, int column, char value) {
         if (isValidPosition(row, column)) {
-            if (this.position[row][column] != '\0') {
-                System.out.print("\n\n\n");
-                System.err.println("La posición seleccionada ya está ocupada. Por favor, selecciona otra posición.");
-            } else {
+         
+            if (this.position[row][column] == '\0'){//como el codigo esta comentado , estoy garantizando que se muestre el mensaje si está vacio
                 this.position[row][column] = value;
                 System.out
                         .println("Has insertado el valor: " + value + " en la fila: " + row + " y columna: " + column);
@@ -78,5 +76,13 @@ public class Board {
      */
     private boolean isValidPosition(int row, int column) {
         return row >= 0 && row < this.row && column >= 0 && column < this.column;
+    }
+
+    //funcion para validar si la posicion ya tiene un valor
+    public boolean hasValue(int row, int column) {
+        if (this.position[row][column] != '\0') {//movi este codigo de la linea 55 para que muestre el mensaje de error
+            return true;
+        }
+        return false;
     }
 }

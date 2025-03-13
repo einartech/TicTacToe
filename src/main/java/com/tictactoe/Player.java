@@ -22,14 +22,14 @@ public class Player {
      * @return Un arreglo de enteros donde el primer elemento es la fila y el
      *         segundo es la columna.
      */
-    public int[] play() {
+    public int[] play(boolean playerTryAgain ) {//agregue un parametro para pedirle al usuario que intente de nuevo
         int row = -1;
         int column = -1;
         boolean validInput = false;
 
         while (!validInput) {
-            System.out.println("Turno : " + this.id);
-            System.out.println("Selecciona una fila y una columna (separadas por un espacio):");
+            System.out.println(playerTryAgain ? "" : "Turno : " + this.id);//si viene en true el playertryagain,no se muestra el turno 
+            System.out.println(playerTryAgain ? "Ese sitio está ocupado, intenta de nuevo:" : "Selecciona una fila y una columna (separadas por un espacio):");//muestra el mensaje si el usuario debe intentarlo de nuevo
             String response = this.scanner.nextLine();
 
             String[] parts = response.split(" ");
