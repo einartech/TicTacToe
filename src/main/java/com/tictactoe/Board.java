@@ -25,21 +25,19 @@ public class Board {
     public void printBoard() {
         for (int rowIndex = 0; rowIndex < this.position.length; rowIndex++) {
             for (int columnIndex = 0; columnIndex < this.position[rowIndex].length; columnIndex++) {
+                if (columnIndex > 0) {
+                    System.out.print(" | ");
+                }
                 if (this.position[rowIndex][columnIndex] == '\0') {
-                    if (columnIndex == 0) {
-                        System.out.print("\t_");
-                    } else {
-                        System.out.print(" _");
-                    }
+                    System.out.print(" ");
                 } else {
-                    if (columnIndex == 0) {
-                        System.out.print("\t" + this.position[rowIndex][columnIndex]);
-                    } else {
-                        System.out.print(" " + this.position[rowIndex][columnIndex]);
-                    }
+                    System.out.print(this.position[rowIndex][columnIndex]);
                 }
             }
             System.out.println();
+            if (rowIndex < this.position.length - 1) {
+                System.out.println("---------");
+            }
         }
     }
 
@@ -52,14 +50,16 @@ public class Board {
      */
     public void editBoard(int row, int column, char value) {
         if (isValidPosition(row, column)) {
-         
-            if (this.position[row][column] == '\0'){//como el codigo esta comentado , estoy garantizando que se muestre el mensaje si está vacio
+            if (this.position[row][column] != '\0') {
+                System.out.print("\n\n\n");
+                System.err.println("La posición seleccionada ya está ocupada. Por favor, selecciona otra posición.");
+            } else {
                 this.position[row][column] = value;
                 System.out
                         .println("Has insertado el valor: " + value + " en la fila: " + row + " y columna: " + column);
             }
         } else {
-            // System.out.print("\n\n\n");
+            System.out.print("\n\n\n");
             System.err.println("Posición inválida. Fila: " + row + ", Columna: " + column + ". "
                     + "Por favor, ingresa una fila y columna válidas. El máximo número de fila es: "
                     + (this.row - 1) + " y el máximo número de columna es: " + (this.column - 1) + ". "
@@ -67,53 +67,41 @@ public class Board {
         }
     }
 
-    // Verificar si el jugador ha ganado teniendo en cuenta los sigtes casos:
-    
-    public  boolean checkVictory(char idPlayer) {
-        // caso1 Verificar filas
+    /**
+     * Verifica si el jugador ha ganado.
+     *
+     * @param idPlayer Identificador del jugador.
+     * @return true si el jugador ha ganado, false en caso contrario.
+     */
+    public boolean checkVictory(char idPlayer) {
+        // Verificar filas
         for (int rowIndex = 0; rowIndex < this.position.length; rowIndex++) {
-            if (this.position[rowIndex][0] == idPlayer && this.position[rowIndex][1] == idPlayer && this.position[rowIndex][2] == idPlayer) {
+            if (this.position[rowIndex][0] == idPlayer && this.position[rowIndex][1] == idPlayer
+                    && this.position[rowIndex][2] == idPlayer) {
                 return true;
             }
         }
-        
-        // caso2 Verificar columnas
+
+        // Verificar columnas
         for (int columnIndex = 0; columnIndex < this.column; columnIndex++) {
-            if (this.position[0][columnIndex] == idPlayer && this.position[1][columnIndex] == idPlayer && this.position[2][columnIndex] == idPlayer) {
+            if (this.position[0][columnIndex] == idPlayer && this.position[1][columnIndex] == idPlayer
+                    && this.position[2][columnIndex] == idPlayer) {
                 return true;
             }
         }
-        
-        // caso3 Verificar diagonal principal ejemplo: \
+
+        // Verificar diagonal principal
         if (this.position[0][0] == idPlayer && this.position[1][1] == idPlayer && this.position[2][2] == idPlayer) {
             return true;
         }
-        
-        // caso4 Verificar diagonal secundaria ejemplo : /
+
+        // Verificar diagonal secundaria
         if (this.position[0][2] == idPlayer && this.position[1][1] == idPlayer && this.position[2][0] == idPlayer) {
             return true;
         }
-        
-        return false;  // Si no se cumple ningun caso 
-    }
 
-    // Verificar si el tablero está lleno para usarse en la función isPlayerEqual
-    private boolean fullBoard() {
-        for (int rowIndex = 0; rowIndex < this.position.length; rowIndex++) {
-            for (int columnIndex = 0; columnIndex < this.position[rowIndex].length; columnIndex++) {
-                if (this.position[rowIndex][columnIndex] == '\0') { 
-                    return false;
-                }
-            }
-        }
-        return true;
+        return false;
     }
-
-    // Verifica  si esta lleno el tablero y nos se encuentra ningun jugador con la victoria
-    public  boolean isPlayerEqual(char idPlayer1, char idPlayer2) {
-        return fullBoard() && !checkVictory(idPlayer1) && !checkVictory(idPlayer2);
-    }
-
 
     /**
      * Verifica si la posición especificada es válida dentro del tablero.
@@ -126,21 +114,66 @@ public class Board {
         return row >= 0 && row < this.row && column >= 0 && column < this.column;
     }
 
-    //funcion para validar si la posicion ya tiene un valor
+    /**
+     * Verifica si el tablero está lleno.
+     *
+     * @return true si el tablero está lleno, false en caso contrario.
+     */
+    public boolean fullBoard() {
+        for (int rowIndex = 0; rowIndex < this.position.length; rowIndex++) {
+            for (int columnIndex = 0; columnIndex < this.position[rowIndex].length; columnIndex++) {
+                if (this.position[rowIndex][columnIndex] == '\0') {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Verifica si los dos jugadores tienen el mismo identificador.
+     *
+     * @param idPlayer1 Identificador del primer jugador.
+     * @param idPlayer2 Identificador del segundo jugador.
+     * @return true si los identificadores son iguales, false en caso contrario.
+     */
+    public boolean isPlayerEqual(char idPlayer1, char idPlayer2) {
+        return idPlayer1 == idPlayer2;
+    }
+
+    /**
+     * Verifica si una posición tiene un valor.
+     *
+     * @param row    Fila a verificar.
+     * @param column Columna a verificar.
+     * @return true si la posición tiene un valor, false en caso contrario.
+     */
     public boolean hasValue(int row, int column) {
-        if (!this.isValidPosition(row, column)) {//movi este codigo de la linea 55 para que muestre el mensaje de error
-            // System.out.print("\n\n\n");
-            System.err.println("Posición inválida. Fila: " + row + ", Columna: " + column + ". "
-                    + "Por favor, ingresa una fila y columna válidas. El máximo número de fila es: "
-                    + (this.row - 1) + " y el máximo número de columna es: " + (this.column - 1) + ". "
-                    + "El mínimo de ambos es 0.");
-            return true;
-        }
-        if (this.position[row][column] != '\0') {//movi este codigo de la linea 55 para que muestre el mensaje de error
-            // System.out.print("\n\n\n");
-            System.err.println("Ese sitio está ocupado");
-            return true;
-        }
-        return false;
+        return this.position[row][column] != '\0';
+    }
+
+    // Getters and Setters
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
+    public char[][] getPosition() {
+        return position;
+    }
+
+    public void setPosition(char[][] position) {
+        this.position = position;
     }
 }

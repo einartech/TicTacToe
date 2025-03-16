@@ -45,23 +45,26 @@ public class Main {
     board.printBoard();
     System.out.print("\n\n\n");
     int turn = 0;
-    boolean tryAgain = false;// defini una variable (tryAgain) para que el jugador pueda intentarlo de nuevo
-                             // digitando las coordenadas
+    boolean tryAgain = false;
 
     // Ciclo de turnos del juego
     while (turn < 9) {
       if (tryAgain) {
-        System.out.println("Turno actual: " + turn);// para que mostrar el turno actual? no se muestra el
+        System.out.println("Turno actual: " + turn);
       }
-                                                                  // turno actual cuando es un reintento
       Player currentPlayer = (turn % 2 == 0) ? player1 : player2;
-      int[] coordinate = currentPlayer.play(tryAgain);// va el valor tryAgain para que no se muestre el mensaje :
-                                                      // intentalo de nuevo
-      tryAgain = board.hasValue(coordinate[0], coordinate[1]);// asigna el valor que Verifica si tiene un valor en la
-                                                              // posicion
-      if (!tryAgain) {// if para validar si es un reintento
+      int[] coordinate = currentPlayer.play(tryAgain);
 
-        // codigo como estaba para asignar el valor en el tablero
+      // Validar la entrada del usuario
+      if (coordinate[0] < 0 || coordinate[0] >= board.getRow() || coordinate[1] < 0
+          || coordinate[1] >= board.getColumn()) {
+        System.out.println("Posición inválida. Por favor, ingresa una fila y columna válidas.");
+        tryAgain = true;
+        continue;
+      }
+
+      tryAgain = board.hasValue(coordinate[0], coordinate[1]);
+      if (!tryAgain) {
         board.editBoard(coordinate[0], coordinate[1], currentPlayer.getId());
         System.out.print("\n\n\n");
         board.printBoard();
@@ -73,14 +76,13 @@ public class Main {
           break;
         }
 
-        boolean isPlayerEqual = board.isPlayerEqual(player1.getId(), player2.getId());
-        if (isPlayerEqual) {
-          System.out.println("El juego ha terminado en empate!");
-          break;
-        } 
-        
         turn++;
       }
+    }
+
+    // Verificar si el juego ha terminado en empate
+    if (turn == 9 && !board.checkVictory(player1.getId()) && !board.checkVictory(player2.getId())) {
+      System.out.println("El juego ha terminado en empate!");
     }
 
     // Cerrar los escáneres de los jugadores
