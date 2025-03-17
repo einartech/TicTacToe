@@ -74,7 +74,6 @@ public class Board {
      * @return true si el jugador ha ganado, false en caso contrario.
      */
     public boolean checkVictory(char idPlayer) {
-        // Verificar filas
         for (int rowIndex = 0; rowIndex < this.position.length; rowIndex++) {
             if (this.position[rowIndex][0] == idPlayer && this.position[rowIndex][1] == idPlayer
                     && this.position[rowIndex][2] == idPlayer) {
@@ -82,7 +81,6 @@ public class Board {
             }
         }
 
-        // Verificar columnas
         for (int columnIndex = 0; columnIndex < this.column; columnIndex++) {
             if (this.position[0][columnIndex] == idPlayer && this.position[1][columnIndex] == idPlayer
                     && this.position[2][columnIndex] == idPlayer) {
@@ -90,12 +88,10 @@ public class Board {
             }
         }
 
-        // Verificar diagonal principal
         if (this.position[0][0] == idPlayer && this.position[1][1] == idPlayer && this.position[2][2] == idPlayer) {
             return true;
         }
 
-        // Verificar diagonal secundaria
         if (this.position[0][2] == idPlayer && this.position[1][1] == idPlayer && this.position[2][0] == idPlayer) {
             return true;
         }
@@ -152,7 +148,6 @@ public class Board {
         return this.position[row][column] != '\0';
     }
 
-    // Getters and Setters
     public int getRow() {
         return row;
     }

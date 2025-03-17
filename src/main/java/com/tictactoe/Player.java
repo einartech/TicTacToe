@@ -59,7 +59,6 @@ public class Player {
         this.scanner.close();
     }
 
-    // Getters and Setters
     public char getId() {
         return id;
     }

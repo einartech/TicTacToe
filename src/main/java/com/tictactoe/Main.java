@@ -4,7 +4,6 @@ public class Main {
 
   public static void main(String[] args) {
 
-    // Título completo "TICTACTOE" con estilo ASCII mejorado y bordes cuadrados
     System.out.print("\n\n\n");
 
     System.out.println("#################################################################################");
@@ -35,19 +34,16 @@ public class Main {
 
     System.out.print("\n\n\n");
 
-    // Inicializar el tablero y los jugadores
     Board board = new Board(3, 3);
     Player player1 = new Player('X');
     Player player2 = new Player('O');
 
-    // Imprimir el tablero inicial
     System.out.print("\n\n\n");
     board.printBoard();
     System.out.print("\n\n\n");
     int turn = 0;
     boolean tryAgain = false;
 
-    // Ciclo de turnos del juego
     while (turn < 9) {
       if (tryAgain) {
         System.out.println("Turno actual: " + turn);
@@ -55,7 +51,6 @@ public class Main {
       Player currentPlayer = (turn % 2 == 0) ? player1 : player2;
       int[] coordinate = currentPlayer.play(tryAgain);
 
-      // Validar la entrada del usuario
       if (coordinate[0] < 0 || coordinate[0] >= board.getRow() || coordinate[1] < 0
           || coordinate[1] >= board.getColumn()) {
         System.out.println("Posición inválida. Por favor, ingresa una fila y columna válidas.");
@@ -80,16 +75,13 @@ public class Main {
       }
     }
 
-    // Verificar si el juego ha terminado en empate
     if (turn == 9 && !board.checkVictory(player1.getId()) && !board.checkVictory(player2.getId())) {
       System.out.println("El juego ha terminado en empate!");
     }
 
-    // Cerrar los escáneres de los jugadores
     player1.closeScanner();
     player2.closeScanner();
 
-    // Mensaje de despedida
     System.out.println("Gracias por jugar al Tic Tac Toe!");
   }
 }
