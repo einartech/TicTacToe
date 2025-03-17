@@ -60,14 +60,10 @@ Para ejecutar el proyecto en un entorno **Maven** con **Java 21**, sigue estos p
  mvn exec:java -Dexec.mainClass="com.tictactoe.Main"
 ```
 
-### 3️⃣ Ejecutar el flujo de Test utilizando maven o bash - Preguntar
+### 4️⃣ Ejecutar el flujo de Test utilizando junit mediante ejecución con bash
 
 ```sh
- mvn test
-
- OR
-
- ./run_tests.sh (using bash)
+ ./run_tests.sh
 ```
 
 > ⚠️ **Nota:** Asegúrate de tener **Java 21** y **Maven** correctamente instalados en tu sistema.
